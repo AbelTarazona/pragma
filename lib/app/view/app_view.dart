@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pragma_challenge/counter/view/counter_page.dart';
+import 'package:pragma_challenge/home/home.dart';
 import 'package:pragma_challenge/l10n/l10n.dart';
 
 class AppView extends StatelessWidget {
@@ -16,7 +16,7 @@ class AppView extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const HomePage(),
     );
   }
 }
