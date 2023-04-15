@@ -8,8 +8,9 @@ environment:
   flutter: 3.3.0
 
 dependencies:
-  flutter:
-    sdk: flutter
+  equatable: ^2.0.5
+  cat_api:
+    path: ../cat_api
 
 dev_dependencies:
   flutter_test:
