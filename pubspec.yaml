@@ -19,6 +19,7 @@ dependencies:
   cat_api:
     path: packages/cat_api
   flutter_dotenv: ^5.0.2
+  json_annotation: ^4.8.0
 
 dev_dependencies:
   bloc_test: ^9.1.1
