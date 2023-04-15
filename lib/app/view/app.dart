@@ -1,22 +1,18 @@
+import 'package:cat_repository/cat_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:pragma_challenge/counter/counter.dart';
-import 'package:pragma_challenge/l10n/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pragma_challenge/app/app.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({super.key, required this.catRepository});
+
+  final CatRepository catRepository;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
-        ),
-      ),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+    return RepositoryProvider.value(
+      value: catRepository,
+      child: const AppView(),
     );
   }
 }
