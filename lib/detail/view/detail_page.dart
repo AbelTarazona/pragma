@@ -13,7 +13,7 @@ class DetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(cat.name),
       ),
-      body: const DetailView(),
+      body: DetailView(cat: cat,),
     );
   }
 }

@@ -35,14 +35,17 @@ class CatCard extends StatelessWidget {
                 ),
               ),
               16.0.heightBox,
-              CachedNetworkImage(
-                imageUrl:
-                    'https://cdn2.thecatapi.com/images/${cat.referenceImageId}.jpg',
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    Center(
-                        child: CircularProgressIndicator(
-                            value: downloadProgress.progress)),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+              Hero(
+                tag: cat.id,
+                child: CachedNetworkImage(
+                  imageUrl:
+                      'https://cdn2.thecatapi.com/images/${cat.referenceImageId}.jpg',
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
+                          child: CircularProgressIndicator(
+                              value: downloadProgress.progress)),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
               ),
               16.0.heightBox,
               Row(
