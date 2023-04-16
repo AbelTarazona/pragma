@@ -20,6 +20,9 @@ dependencies:
     path: packages/cat_api
   flutter_dotenv: ^5.0.2
   json_annotation: ^4.8.0
+  equatable: ^2.0.5
+  cached_network_image: ^3.2.3
+  searchable_listview: ^2.3.2
 
 dev_dependencies:
   bloc_test: ^9.1.1
