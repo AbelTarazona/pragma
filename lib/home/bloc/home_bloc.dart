@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:cat_repository/cat_repository.dart';
@@ -32,5 +31,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } catch (error) {
       emit(state.copyWith(status: HomeStatus.error));
     }
+  }
+
+  Future<String> getImage(String reference) async {
+    return _catRepository.fetchImageCat(reference);
   }
 }

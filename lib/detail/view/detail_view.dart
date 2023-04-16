@@ -12,21 +12,17 @@ class DetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Hero(
-          tag: cat.id,
-          child: CachedNetworkImage(
-            imageUrl:
-                'https://cdn2.thecatapi.com/images/${cat.referenceImageId}.jpg',
-            height: MediaQuery.of(context).size.height * 0.5,
-            width: double.infinity,
-            fit: BoxFit.cover,
-            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                Center(
-              child:
-                  CircularProgressIndicator(value: downloadProgress.progress),
-            ),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+        CachedNetworkImage(
+          imageUrl: cat.image,
+          height: MediaQuery.of(context).size.height * 0.5,
+          width: double.infinity,
+          fit: BoxFit.cover,
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              Center(
+            child:
+                CircularProgressIndicator(value: downloadProgress.progress),
           ),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Expanded(
           child: SingleChildScrollView(

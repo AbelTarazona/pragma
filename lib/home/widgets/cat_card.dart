@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cat_repository/cat_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pragma_challenge/detail/view/view.dart';
+import 'package:pragma_challenge/home/bloc/home_bloc.dart';
 import 'package:pragma_challenge/utils/extensions/sizebox.dart';
 
 class CatCard extends StatelessWidget {
@@ -35,17 +37,28 @@ class CatCard extends StatelessWidget {
                 ),
               ),
               16.0.heightBox,
-              Hero(
-                tag: cat.id,
-                child: CachedNetworkImage(
-                  imageUrl:
-                      'https://cdn2.thecatapi.com/images/${cat.referenceImageId}.jpg',
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Center(
-                          child: CircularProgressIndicator(
-                              value: downloadProgress.progress)),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
+              FutureBuilder(
+                future: context.read<HomeBloc>().getImage(cat.referenceImageId),
+                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  if (snapshot.hasData) {
+                    final url = snapshot.data as String;
+                    cat.image = url;
+                    return CachedNetworkImage(
+                      imageUrl:url,
+                      progressIndicatorBuilder: (context, url, downloadProgress) =>
+                          Center(
+                              child: CircularProgressIndicator(
+                                  value: downloadProgress.progress)),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                    );
+                  } else if (snapshot.hasError) {
+                    return const Text('Failed cat image 😿');
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
               ),
               16.0.heightBox,
               Row(
