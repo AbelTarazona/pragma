@@ -45,9 +45,22 @@ class CatApi {
 
     try {
       return responseBody
-          .map(
-              (dynamic item) => CatModel.fromJson(item as Map<String, dynamic>))
+          .map((dynamic item) => CatModel.fromJson(item as Map<String, dynamic>))
           .toList();
+    } catch (_) {
+      throw JsonDeserializationException();
+    }
+  }
+
+  /// Fetch cat image.
+  ///
+  /// REST call: `GET /images`
+  Future<String> fetchCatImage(String referenceImage) async {
+    final uri = Uri.https(base, '/v1/images/$referenceImage');
+    final responseBody = await _getBody(uri);
+
+    try {
+      return responseBody['url'] as String;
     } catch (_) {
       throw JsonDeserializationException();
     }
@@ -68,6 +81,26 @@ class CatApi {
 
     try {
       return json.decode(response.body) as List;
+    } catch (_) {
+      throw JsonDecodeException();
+    }
+  }
+
+  Future<dynamic> _getBody(Uri uri) async {
+    http.Response response;
+
+    try {
+      response = await _httpClient.get(uri);
+    } catch (_) {
+      throw HttpException();
+    }
+
+    if (response.statusCode != 200) {
+      throw HttpRequestFailure(response.statusCode);
+    }
+
+    try {
+      return json.decode(response.body);
     } catch (_) {
       throw JsonDecodeException();
     }

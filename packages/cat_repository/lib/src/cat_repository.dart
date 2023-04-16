@@ -24,18 +24,31 @@ class CatRepository {
       throw CatsException();
     }
   }
+
+  /// Returns a cat image.
+  ///
+  /// Throws a [CatsException] if an error occurs.
+  Future<String> fetchImageCat(String reference) async {
+    try {
+      final catImage = await _catApi.fetchCatImage(reference);
+      return catImage;
+    } on Exception {
+      throw CatsException();
+    }
+  }
 }
 
 extension on CatModel {
   Cat toCat() {
     return Cat(
-        id: id ?? '',
-        name: name ?? '',
-        origin: origin ?? '',
-        description: description ?? '',
-        lifeSpan: lifeSpan ?? '',
-        adaptability: adaptability ?? 0,
-        intelligence: intelligence ?? 0,
-        referenceImageId: referenceImageId ?? '',);
+      id: id ?? '',
+      name: name ?? '',
+      origin: origin ?? '',
+      description: description ?? '',
+      lifeSpan: lifeSpan ?? '',
+      adaptability: adaptability ?? 0,
+      intelligence: intelligence ?? 0,
+      referenceImageId: referenceImageId ?? '',
+    );
   }
 }

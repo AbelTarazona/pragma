@@ -11,7 +11,7 @@ part 'cat_model.g.dart';
 )
 class CatModel extends Equatable {
   /// {@macro rocket}
-  const CatModel({
+  CatModel({
     required this.id,
     required this.name,
     required this.origin,

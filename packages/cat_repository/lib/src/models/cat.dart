@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 /// {@endtemplate}
 class Cat extends Equatable {
   /// {@macro rocket}
-  const Cat({
+  Cat({
     required this.id,
     required this.name,
     required this.origin,
@@ -14,6 +14,7 @@ class Cat extends Equatable {
     required this.adaptability,
     required this.intelligence,
     required this.referenceImageId,
+    this.image = ''
   });
 
   final String id;
@@ -24,8 +25,9 @@ class Cat extends Equatable {
   final int adaptability;
   final int intelligence;
   final String referenceImageId;
+  String image;
 
   @override
   List<Object?> get props => [id, name, origin, description, lifeSpan, adaptability,
-    intelligence, referenceImageId];
+    intelligence, referenceImageId, image];
 }
