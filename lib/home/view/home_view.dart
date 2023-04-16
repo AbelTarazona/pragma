@@ -25,45 +25,39 @@ class HomeView extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        return Column(
-          children: [
-            24.0.heightBox,
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: SearchableList<Cat>(
-                  initialList: state.cats,
-                  builder: (cat) => CatCard(cat: cat),
-                  filter: (value) => state.cats
-                      .where(
-                        (element) => element.name.toLowerCase().contains(value),
-                      ).toList(),
-                  emptyWidget: const Text('No cats'),
-                  autoFocusOnSearch: false,
-                  inputDecoration: InputDecoration(
-                    labelText: 'Search cat breed',
-                    isDense: true,
-                    fillColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.blue,
+        return SizedBox(
+          width: double.infinity,
+          child: Column(
+            children: [
+              24.0.heightBox,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SearchableList<Cat>(
+                    initialList: state.cats,
+                    builder: (cat) => CatCard(cat: cat),
+                    filter: (value) => state.cats
+                        .where(
+                          (element) => element.name.toLowerCase().contains(value),
+                        ).toList(),
+                    emptyWidget: const Text('No cats'),
+                    autoFocusOnSearch: false,
+                    inputDecoration: InputDecoration(
+                      labelText: 'Search cat breed',
+                      isDense: true,
+                      fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.blue,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
                       ),
-                      borderRadius: BorderRadius.circular(5),
                     ),
                   ),
                 ),
-              ),
-            )
-/*            Expanded(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, pos) {
-                  return CatCard(cat: state.cats[pos]);
-                },
-                itemCount: state.cats.length,
-              ),
-            ),*/
-          ],
+              )
+            ],
+          ),
         );
       },
     );
